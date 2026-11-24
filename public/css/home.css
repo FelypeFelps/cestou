@@ -1,0 +1,85 @@
+.home-page {
+    --home-blue: #103f87;
+    --home-yellow: #ffc400;
+    --home-cream: #fff5e6;
+    --home-ink: #0b284f;
+    color: var(--home-ink);
+    background-color: var(--home-cream);
+}
+
+.home-page .home-hero {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+    color: #fff;
+    background-color: var(--home-blue);
+}
+
+.home-page .home-title {
+    max-width: 17ch;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.home-page .home-title span {
+    color: var(--home-yellow);
+}
+
+.home-page .home-description {
+    max-width: 55ch;
+    font-size: 1.125rem;
+    line-height: 1.65;
+}
+
+.home-page .home-product {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: 1rem;
+    color: var(--home-ink);
+    background-color: #fff;
+}
+
+.home-page .home-package {
+    color: #506078;
+    font-size: 0.875rem;
+}
+
+.home-page .home-prices {
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+    font-size: 0.875rem;
+}
+
+.home-page .home-prices th,
+.home-page .home-prices td {
+    padding: 0.75rem 0.5rem;
+    vertical-align: middle;
+}
+
+.home-page .home-prices th {
+    font-weight: 600;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.home-page .home-prices td {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.home-page .home-lowest-price > * {
+    background-color: #fff1b8;
+}
+
+.home-page .home-prices .home-unavailable {
+    color: #506078;
+    font-size: 0.8125rem;
+    font-weight: 400;
+}
+
+.home-page .home-comparison figcaption {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}

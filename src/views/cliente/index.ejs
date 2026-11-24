@@ -1,0 +1,67 @@
+<%- include('../components/header') %>
+<link rel="stylesheet" href="/css/home.css">
+<%- include('../components/menu') %>
+
+<main class="home-page">
+    <section class="home-hero" aria-labelledby="home-title">
+        <div class="container">
+            <div class="row align-items-center gy-5 gx-lg-5">
+                <div class="col-lg-7">
+                    <h1 id="home-title" class="home-title mb-4">
+                        Compare preços nos <span>mercadinhos do bairro.</span>
+                    </h1>
+                    <p class="home-description mb-0">
+                        O Cestou facilita a busca e a comparação de preços nos mercadinhos
+                        da cidade, permitindo que os consumidores encontrem produtos e
+                        consultem sua disponibilidade.
+                    </p>
+                </div>
+
+                <div class="col-lg-5">
+                    <figure class="home-comparison mb-0">
+                        <div class="home-product">
+                            <h2 class="h5 fw-bold mb-1">Arroz branco Tipo 1</h2>
+                            <p class="home-package mb-3">Pacote de 5 kg</p>
+
+                            <table class="home-prices w-100">
+                                <caption class="visually-hidden">
+                                    Exemplo de preços de um mesmo produto em três mercadinhos.
+                                    Dados ilustrativos.
+                                </caption>
+                                <thead class="visually-hidden">
+                                    <tr>
+                                        <th scope="col">Mercadinho</th>
+                                        <th scope="col">Preço ou disponibilidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="home-lowest-price">
+                                        <th scope="row">Mercadinho São José</th>
+                                        <td>R$ 24,90</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mercadinho Bom Preço</th>
+                                        <td>R$ 26,49</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Comercial Santa Rita</th>
+                                        <td class="home-unavailable">Sem estoque</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <figcaption class="mt-3">
+                            Exemplo de comparação. Preços e disponibilidade ilustrativos.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-4">
+        <p class="mb-0">A proposta é economizar tempo nas compras e fortalecer o comércio local.</p>
+    </div>
+</main>
+
+<%- include('../components/footer') %>
