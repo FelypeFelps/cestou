@@ -20,3 +20,10 @@ O Cestou utiliza o padrão MVC (Model, View, Controller), separando as responsab
 | public | CSS, JavaScript e imagens |
 | database | Scripts SQL do banco de dados |
 | docs | Documentação e protótipos |
+
+## Equipe
+| Felipe da Costa Mota 
+| Luís Felype Monteiro da Silva Sousa 
+| Luan Lucas Oliveira Sousa 
+| Renan Cardoso da Rocha 
+| Vitor Sâmile Silva Santos 
