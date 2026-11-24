@@ -39,6 +39,14 @@ Exemplo: ao pesquisar "arroz", a rota encaminha o pedido ao Controller, que pede
 
 O cabeçalho, o menu e o rodapé ficam em `src/views/components` e são reaproveitados em todas as telas com `include` do EJS.
 
+
+
+## Protótipos
+
+- [Protótipos da área do cliente](docs/prototipos/cliente.pdf)
+
+
+
 ## Organização dos diretórios
 
 | Diretório | Responsabilidade |
