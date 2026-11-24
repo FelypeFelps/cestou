@@ -1,0 +1,64 @@
+<%
+    // Página atual, para destacar o link no menu (ex.: 'comparar', 'onde-tem', 'lista', 'pedidos')
+    const ativo = typeof paginaAtual !== 'undefined' ? paginaAtual : '';
+    // Usuário logado: mostra "Minha conta" em vez de "Entrar"
+    const logado = typeof usuario !== 'undefined' && usuario;
+%>
+<nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/">
+            <span class="d-inline-flex align-items-center justify-content-center bg-warning rounded p-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 10l3-6M19 10l-3-6"/>
+                    <path d="M3 10h18l-2 10H5z"/>
+                    <path d="M9 14v3M12 14v3M15 14v3"/>
+                </svg>
+            </span>
+            Cestou
+        </a>
+
+        <!-- Botão do menu no celular -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+
+            <!-- Links principais -->
+            <ul class="navbar-nav me-auto ms-lg-4 gap-lg-1">
+                <li class="nav-item">
+                    <a class="nav-link px-3 rounded <%= ativo === 'comparar' ? 'active bg-primary-subtle fw-semibold' : '' %>" href="/comparar">Comparar preços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 rounded <%= ativo === 'onde-tem' ? 'active bg-primary-subtle fw-semibold' : '' %>" href="/onde-tem">Onde tem?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 rounded <%= ativo === 'lista' ? 'active bg-primary-subtle fw-semibold' : '' %>" href="/lista">Minha lista</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 rounded <%= ativo === 'pedidos' ? 'active bg-primary-subtle fw-semibold' : '' %>" href="/pedidos">Meus pedidos</a>
+                </li>
+            </ul>
+
+            <!-- Lado direito: bairro e conta -->
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link d-flex align-items-center gap-1 small" href="#">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                    Meu bairro
+                </a>
+
+                <% if (logado) { %>
+                    <a class="btn btn-outline-secondary btn-sm px-3" href="/conta">Minha conta</a>
+                <% } else { %>
+                    <a class="btn btn-outline-secondary btn-sm px-3" href="/login">Entrar</a>
+                <% } %>
+            </div>
+
+        </div>
+    </div>
+</nav>
