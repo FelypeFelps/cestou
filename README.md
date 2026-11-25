@@ -1,3 +1,4 @@
+
 # Cestou
 
 Projeto acadêmico de Programação Web II desenvolvido por cinco integrantes. O Cestou propõe facilitar a comparação de preços e a localização de produtos nos mercadinhos da cidade, valorizando o comércio local.
@@ -17,8 +18,8 @@ Contribuições registradas nesta etapa do projeto:
 | Integrante | Responsabilidades e contribuições |
 |---|---|
 | Felipe da Costa Mota | Menu de navegação, organização complementar dos diretórios e documentação inicial. |
-| Luís Felype Monteiro da Silva Sousa | Inicialização do projeto, estrutura inicial MVC e configuração das dependências. |
-| Luan Lucas Oliveira Sousa | Protótipos da área do cliente, página inicial, Home Controller e CSS específico da Home. |
+| Luís Felype Monteiro da Silva Sousa | Inicialização do projeto, estrutura inicial MVC, configuração das dependências, implementação do Model, integração das camadas MVC e correção do layout compartilhado. |
+| Luan Lucas Oliveira Sousa | Protótipos da área do cliente, página inicial, implementação inicial do Home Controller, CSS específico da Home e documentação. |
 | Renan Cardoso da Rocha | Componentes reutilizáveis de cabeçalho e rodapé. |
 | Vitor Sâmile Silva Santos | Configuração do servidor Express e da rota inicial. |
 
@@ -38,9 +39,11 @@ Contribuições registradas nesta etapa do projeto:
 ## O que funciona nesta versão
 
 - Página inicial em `GET /`, renderizada pelo Controller e pela View EJS.
+- Integração entre Model, View e Controller.
 - Cabeçalho, menu e rodapé reutilizados por meio de includes do EJS.
 - Layout responsivo com menu recolhível no celular.
-- Exemplo estático de comparação de preços, identificado como ilustrativo.
+- Exemplo de comparação de preços renderizado dinamicamente a partir dos dados ilustrativos fornecidos pelo Model.
+- Identificação e destaque do menor preço entre os estabelecimentos com produtos disponíveis.
 - Protótipos da área do cliente disponíveis na documentação.
 
 Busca, comparação real de preços, autenticação, mapa, lista de compras, pedidos e área do lojista ainda não estão implementados. Os links do menu representam telas previstas; apenas a rota inicial está disponível. O item “Meu bairro” ainda é um link sem destino definido.
@@ -51,18 +54,30 @@ Não há consultas ao banco de dados. Os arquivos `src/config/database.js` e `da
 
 O projeto segue o MVC tradicional, com rotas Express direcionando as requisições aos Controllers:
 
-- **Model:** ficará responsável pelo acesso ao MySQL e pelas regras de negócio. A pasta `src/models` ainda não possui implementação.
+- **Model:** responsável pelos dados e pelas regras de negócio. Nesta etapa, `produtoModel.js` fornece os dados ilustrativos da comparação de preços e identifica o menor preço entre os estabelecimentos. O acesso ao MySQL será implementado nas próximas etapas.
 - **View:** apresenta a interface com EJS, HTML e Bootstrap. As telas do cliente ficam em `src/views/cliente` e os componentes compartilhados em `src/views/components`.
-- **Controller:** recebe a requisição, prepara os dados necessários e seleciona a View. Nesta etapa, `homeController.index` apenas renderiza `cliente/index`.
+- **Controller:** recebe a requisição, consulta o Model e seleciona a View. Nesta etapa, `homeController.index` consulta o `produtoModel.js` e encaminha os dados para `cliente/index`.
 - **Routes:** associa endereços e métodos HTTP às funções dos Controllers. `homeRoutes.js` associa `GET /` a `homeController.index`.
 
-O componente `header.ejs` inclui o menu e abre o documento HTML e a tag `<main>`; `footer.ejs` fecha essa tag e o documento. A View da Home inclui esses dois componentes, sem repetir o menu ou criar outro `<main>`.
+O componente `header.ejs` abre o documento HTML, carrega os arquivos CSS e inclui o menu de navegação. O componente `footer.ejs` apresenta o rodapé, carrega o JavaScript do Bootstrap e encerra o documento HTML.
 
-Fluxo atual da página inicial, sem acesso a Model ou banco de dados:
+A View da Home inclui esses dois componentes, evitando a repetição do menu e das estruturas compartilhadas.
+
+Fluxo atual da página inicial:
 
 ```text
-GET / → homeRoutes.js → homeController.index → cliente/index.ejs → HTML
+GET /
+  ↓
+homeRoutes.js
+  ↓
+homeController.js ←→ produtoModel.js
+  ↓
+cliente/index.ejs
+  ↓
+HTML
 ```
+
+Nesta etapa, o Model utiliza dados ilustrativos, sem conexão com o banco de dados.
 
 Estrutura do repositório:
 
@@ -71,7 +86,9 @@ cestou/
 ├── app.js                       # Servidor Express, EJS, arquivos estáticos e rotas
 ├── package.json                 # Dependências e comandos npm
 ├── package-lock.json            # Versões das dependências
-├── .env.example                 # Arquivo reservado; ainda sem variáveis de exemplo
+├── .env.example                 # Arquivo reservado para variáveis de ambiente
+├── .gitignore                   # Arquivos ignorados pelo Git
+├── README.md                    # Documentação do projeto
 ├── database/
 │   └── schema.sql               # Reservado para a estrutura do banco
 ├── docs/
@@ -85,13 +102,18 @@ cestou/
 └── src/
     ├── config/database.js       # Reservado para a conexão com MySQL
     ├── controllers/
-    │   └── homeController.js    # Renderização da página inicial
-    ├── models/                  # Espaço para os Models
+    │   └── homeController.js    # Consulta ao Model e renderização da página inicial
+    ├── models/
+    │   └── produtoModel.js      # Dados ilustrativos e regra de menor preço
     ├── routes/
     │   └── homeRoutes.js        # Rota GET /
     └── views/
-        ├── cliente/index.ejs    # Página inicial do cliente
-        └── components/          # Header, menu e footer reutilizáveis
+        ├── cliente/
+        │   └── index.ejs        # Página inicial do cliente
+        └── components/
+            ├── header.ejs       # Cabeçalho reutilizável
+            ├── menu.ejs         # Menu de navegação
+            └── footer.ejs       # Rodapé reutilizável
 ```
 
 ## Como instalar e rodar
@@ -145,7 +167,7 @@ Depois de iniciar o servidor, acesse `http://localhost:3001`. O arquivo `.env` �
 npm test
 ```
 
-O comando executa `node --test`. Ainda não há testes automatizados versionados. Para uma conferência manual, abra a Home, confira o comparador ilustrativo e teste o menu em uma largura de celular.
+O comando executa `node --test`. Ainda não há testes automatizados versionados. Para uma conferência manual, abra a Home, confira o comparador ilustrativo, o destaque do menor preço, a indicação de indisponibilidade dos produtos e o menu em uma largura de celular.
 
 ## Protótipos
 
