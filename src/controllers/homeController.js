@@ -1,3 +1,7 @@
+const produtoModel = require('../models/produtoModel');
+
 exports.index = (req, res) => {
-    res.render('cliente/index');
+    const produto = produtoModel.obterComparacao();
+
+    res.render('cliente/index', { produto });
 };

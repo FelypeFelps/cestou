@@ -18,8 +18,8 @@
                 <div class="col-lg-5">
                     <figure class="home-comparison mb-0">
                         <div class="home-product">
-                            <h2 class="h5 fw-bold mb-1">Arroz branco Tipo 1</h2>
-                            <p class="home-package mb-3">Pacote de 5 kg</p>
+                            <h2 class="h5 fw-bold mb-1"><%= produto.nome %></h2>
+                            <p class="home-package mb-3"><%= produto.embalagem %></p>
 
                             <table class="home-prices w-100">
                                 <caption class="visually-hidden">
@@ -33,18 +33,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="home-lowest-price">
-                                        <th scope="row">Mercadinho São José</th>
-                                        <td>R$ 24,90</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Mercadinho Bom Preço</th>
-                                        <td>R$ 26,49</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Comercial Santa Rita</th>
-                                        <td class="home-unavailable">Sem estoque</td>
-                                    </tr>
+                                    <% produto.ofertas.forEach(oferta => { %>
+                                        <tr class="<%= oferta.preco === produto.menorPreco ? 'home-lowest-price' : '' %>">
+                                            <th scope="row"><%= oferta.loja %></th>
+
+                                            <% if (oferta.preco === null) { %>
+                                                <td class="home-unavailable">Sem estoque</td>
+                                            <% } else { %>
+                                                <td>
+                                                    <%= oferta.preco.toLocaleString('pt-BR', {
+                                                        style: 'currency',
+                                                        currency: 'BRL'
+                                                    }) %>
+                                                </td>
+                                            <% } %>
+                                        </tr>
+                                    <% }); %>
                                 </tbody>
                             </table>
                         </div>
